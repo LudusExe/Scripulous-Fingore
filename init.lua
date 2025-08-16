@@ -48,8 +48,6 @@ minetest.register_entity("fingore:scripulous", {
                     self.object:set_velocity(vector.multiply(dir, 2))
                     self.object:set_yaw(math.atan2(dir.x, dir.z))
                 end
-
-                -- Attacco se vicino abbastanza e cooldown finito
                 if dist <= 1.5 and self.attack_cooldown <= 0 then
                     nearest_player:punch(self.object, 1.0, {
                         full_punch_interval = 1.0,
@@ -81,7 +79,6 @@ on_punch = function(self, hitter)
     end,
 })
 
--- Comando per spawn manuale
 minetest.register_chatcommand("spawn_fingore", {
     description = "Spawn Scripulous Fingore",
     privs = {give = true},
@@ -106,7 +103,6 @@ minetest.register_chatcommand("spawn_fingore", {
     end
 })
 
--- Funzione di spawn automatico sotterraneo
 local function try_spawn_fingore()
     for _, player in ipairs(minetest.get_connected_players()) do
         local pos = player:get_pos()
@@ -134,7 +130,6 @@ local function try_spawn_fingore()
     end
 end
 
--- Timer globale per spawn automatico ogni 10 secondi
 local global_timer = 0
 minetest.register_globalstep(function(dtime)
     global_timer = global_timer + dtime
@@ -144,7 +139,6 @@ minetest.register_globalstep(function(dtime)
     end
 end)
 
--- Oggetto uovo
 minetest.register_craftitem("fingore:fingore_egg", {
     description = "Egg of Scripulous Fingore",
     inventory_image = "fingore_egg.png",
@@ -165,7 +159,6 @@ minetest.register_craftitem("fingore:fingore_egg", {
     end,
 })
 
--- Oggetto mano
 minetest.register_tool("fingore:fingore_hand", {
     description = "Hand of Fingore",
     inventory_image = "fingore_hand.png",
